@@ -16,19 +16,19 @@ npm install hexo-tag-plantuml --save
 ```
 {% plantuml %}
 start
-:配置Java环境; 
-:下载pantuml.jar;
-:编写描述文件; 
-:执行; 
+:配置Java環境; 
+:下載pantuml.jar;
+:編寫描述文件; 
+:執行; 
 stop
 {% endplantuml %}
 ```
 
 {% plantuml %}
 start
-:配置Java环境; 
-:下载pantuml.jar;
-:编写描述文件; 
-:执行; 
+:配置Java環境; 
+:配置Java環境.jar;
+:編寫描述文件; 
+:執行; 
 stop
 {% endplantuml %}
