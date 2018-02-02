@@ -91,4 +91,9 @@ ng g c repairReport\revenue
 ng g c repairReport\inventory
 ng g c repairReport\accountReceivable
 ng g c repairReport\accountPayable
+//公用
+ng g c shared\components\pageNotFound
+ng g c shared\components\loginCallback
+
+ng g s shared\services\auth
 ```
