@@ -53,7 +53,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 ```
 CommonModule,
 BrowserAnimationsModule, // required animations module
-ToastrModule.forRoot(), // ToastrModule added
+ToastrModule.forRoot({   // 設定toastmessage
+      closeButton: true,
+      progressBar: true,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: false,
+      maxOpened: 5,
+      autoDismiss: true
+    }), // ToastrModule added
 ```
 ## 加入 oidc-client
 ```
@@ -96,4 +103,5 @@ ng g c shared\components\pageNotFound
 ng g c shared\components\loginCallback
 
 ng g s shared\services\auth
+ng g s shared\guards\AuthGuard
 ```
