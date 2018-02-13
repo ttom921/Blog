@@ -18,3 +18,8 @@ date: 2018-01-30 22:21:53
 ```
 程式碼放這邊
 ```
+### Markdown 連結設定
+
+```
+[Google](http://www.google.com/)
+```
