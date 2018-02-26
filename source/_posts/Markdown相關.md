@@ -23,3 +23,17 @@ date: 2018-01-30 22:21:53
 ```
 [Google](http://www.google.com/)
 ```
+### Markdow 表格的設定
+如下的範例
+```
+-|默認左對齊|居中對齊|內容右對齊
+:-:|-|:-:|-:
+1|Left|Center|Right
+2|Left|Center|Right
+3|Left|Center|Right
+```
+-|默認左對齊|居中對齊|內容右對齊
+:-:|-|:-:|-:
+1|Left|Center|Right
+2|Left|Center|Right
+3|Left|Center|Right
