@@ -83,10 +83,3 @@ deploy:
   repository: http://github.com/ttom921/ttom921.github.io.git
   branch: master
   
-# Admin
-admin:
- name: hexo
- password: hexo
- secret: hey hexo
- expire: 60*1
- # cors:http://localhost:3000 
