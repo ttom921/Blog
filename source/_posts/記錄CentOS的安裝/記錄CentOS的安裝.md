@@ -10,7 +10,12 @@ date: 2018-03-01 10:28:43
 ## 在使用ISO燒錄的注意事項
   目前使用Rufus,選擇GPT
 ## 文字模式安裝
-   inst.text  
+inst.text  
+```
+vmlinuz initrd=initrd.img linux dd quiet
+vmlinuz initrd=initrd.img inst.stage2=hd:/dev/sdc4 quiet
+```
+   
 ## 防火牆設定
 顯示目前的設定
 ```
@@ -123,8 +128,34 @@ CREATE USER 'username'@'host_web' IDENTIFIED BY 'password';
 grant all privileges on *.* to root@'%' identified by '12345678' with grant option;
 FLUSH PRIVILEGES;
 ```
+## Core安裝
+Add the dotnet product feed
+```
+sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+sudo sh -c 'echo -e "[packages-microsoft-com-prod]\nname=packages-microsoft-com-prod \nbaseurl= https://packages.microsoft.com/yumrepos/microsoft-rhel7.3-prod\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/dotnetdev.repo'
+```
+1. Install the .NET SDK
+```
+sudo yum update
+sudo yum install libunwind libicu
+sudo yum install dotnet-sdk-2.1.4
+```
+2. 驗證.NET Core安裝
+來到這裡你已經成功安裝.NET Core，建立一個專案測試一下 
+```
+#建立Console專案
+ [root@localhost ~]# dotnet new console -o hwapp 
+#移至目錄
+ [root@localhost ~]# cd hwapp 
+#restore dependencies，例如JSON.NET，EntityFramework，Bootstrap等Library
+ [root@localhost ~]# dotnet restore 
+#執行 
+[root@localhost ~]# dotnet run 
+#***Output***: #> Hello World! 
 
+```
 ## 參考  
 
 1. [Rufus的官方網站](https://rufus.akeo.ie/?locale=zh_TW)
 2. [Rufus製作Ubuntu 16.04 USB安裝隨身碟](http://blog.xuite.net/yh96301/blog/450717778-Rufus%E8%A3%BD%E4%BD%9CUbuntu+16.04+USB%E5%AE%89%E8%A3%9D%E9%9A%A8%E8%BA%AB%E7%A2%9F)
+3. [Core安裝](https://www.microsoft.com/net/learn/get-started/linux/centos)
