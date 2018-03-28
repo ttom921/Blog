@@ -5,7 +5,7 @@ categories: [前端]
 tags: [CSS]
 ---
   記錄有關一些javascript的用法
-## 日期轉換的用法
+#### 日期轉換的用法
 將時間的字串，先取出來,再利用dataToYMD轉成相要的顯示字串
 new Date().toISOString(); // e.g. "2016-11-21T08:00:00.000Z"
 ```
@@ -24,3 +24,19 @@ function dateToYMD(date) {
     return '' + y + '/' + (m <= 9 ? '0' + m : m) + '/' + (d <= 9 ? '0' + d : d);
 }
 ```
+#### 陣列forEach的用法
+有index
+```
+var array1 = ['a', 'b', 'c'];
+array1.forEach(function(item,idx) {
+  console.log(item);
+});
+```
+無index
+```
+var array1 = ['a', 'b', 'c'];
+array1.forEach(function(item) {
+  console.log(item);
+});
+```
+
