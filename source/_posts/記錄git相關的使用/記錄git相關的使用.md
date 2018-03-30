@@ -13,6 +13,15 @@ ssri 有問題它會要你升級到那一版
 ```
 npm install ssri@5.2.2 --save
 ```
+#### 列出所有的git的branch的指令
+```
+git branch -a # 列出所有 branch
+```
+#### 刪除git的branch的指俞
+```
+git branch -d new-branch
+git push origin :cat
+```
 ### 如何在tortoisegit合併branch
 + 1-1 首先，我們要先把儲存庫目前的版本HEAD切換回主要分支master上。這個動作叫做Checkout
 + 1-2 當你按右鍵的時候,然後選擇的是TortoiseGit中的「合併」功能
