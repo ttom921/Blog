@@ -14,3 +14,10 @@ date: 2018-03-30 09:25:59
   import { Observable } from 'rxjs/Observable';
   import { of } from 'rxjs/observable/of';
   ```
+* Http章節
+  有出現api/heroes的服務時,找不到是因為版本的問題，目前是angular5的版本，
+而安裝會是最新的，所以安目前的版本
+```
+npm remove angular-in-memory-web-api@0.6.0
+npm i --save angular-in-memory-web-api@0.5.0
+```
