@@ -13,6 +13,11 @@ ssri 有問題它會要你升級到那一版
 ```
 npm install ssri@5.2.2 --save
 ```
+#### 列出git的版本圖
+```
+git log --all --decorate --oneline --graph
+```
+* [討論git版本圖](https://stackoverflow.com/questions/1057564/pretty-git-branch-graphs)
 #### 列出所有的git的branch的指令
 ```
 git branch -a # 列出所有 branch
