@@ -18,6 +18,8 @@ npm install ssri@5.2.2 --save
 git log --all --decorate --oneline --graph
 ```
 * [討論git版本圖](https://stackoverflow.com/questions/1057564/pretty-git-branch-graphs)
+* [Git 版本控制 branch model 分支模組基本介紹](https://blog.wu-boy.com/2011/03/git-%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6-branch-model-%E5%88%86%E6%94%AF%E6%A8%A1%E7%B5%84%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%B4%B9/)
+
 #### 列出所有的git的branch的指令
 ```
 git branch -a # 列出所有 branch
