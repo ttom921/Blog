@@ -19,6 +19,7 @@ git log --all --decorate --oneline --graph
 ```
 * [討論git版本圖](https://stackoverflow.com/questions/1057564/pretty-git-branch-graphs)
 * [Git 版本控制 branch model 分支模組基本介紹](https://blog.wu-boy.com/2011/03/git-%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6-branch-model-%E5%88%86%E6%94%AF%E6%A8%A1%E7%B5%84%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%B4%B9/)
+* [Git Branch 的操作與基本工作流程](https://blog.gogojimmy.net/2012/01/21/how-to-use-git-2-basic-usage-and-worflow/)
 
 #### 列出所有的git的branch的指令
 ```
