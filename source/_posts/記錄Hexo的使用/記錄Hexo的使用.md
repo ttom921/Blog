@@ -1,6 +1,6 @@
 ---
 title: 記錄Hexo的使用
-date: 2018-02-01 09:59:49
+date: 2018-01-28 09:59:49
 categories: [記錄]
 tags: [hexo]
 ---
