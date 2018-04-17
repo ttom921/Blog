@@ -30,6 +30,25 @@ git branch -a # 列出所有 branch
 git branch -d new-branch
 git push origin :cat
 ```
+#### 列出所有git的tab
+local端
+```
+git tag -l
+```
+Remote端
+```
+git ls-remote --tags origin
+```
+#### 刪除git的tag
+local端
+```
+git tag -d 12345
+```
+Remote端
+```
+git push --delete origin tagName
+```
+
 ### 如何在tortoisegit合併branch
 + 1-1 首先，我們要先把儲存庫目前的版本HEAD切換回主要分支master上。這個動作叫做Checkout
 + 1-2 當你按右鍵的時候,然後選擇的是TortoiseGit中的「合併」功能
