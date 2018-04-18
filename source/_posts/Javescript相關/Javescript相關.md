@@ -2,7 +2,7 @@
 title: Javescript相關
 date: 2018-02-01 14:01:49
 categories: [前端]
-tags: [CSS]
+tags: [javascript]
 ---
   記錄有關一些javascript的用法
 #### 日期轉換的用法
