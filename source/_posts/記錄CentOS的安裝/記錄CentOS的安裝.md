@@ -53,7 +53,7 @@ gpgcheck=1
 ```
 接著時間下 yum 指令來進行安裝
 ```
-yum install MariaDB-server MariaDB-clien
+yum install MariaDB-server MariaDB-client
 或
 sudo MariaDB-server MariaDB-client
 ```
