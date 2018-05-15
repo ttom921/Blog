@@ -1,7 +1,7 @@
 ---
 title: 記錄CentOS的安裝
 categories: [記錄]
-tags: [CentOS,MariaDB ]
+tags: [CentOS,MariaDB,Nginx ]
 date: 2018-03-01 10:28:43
 ---
   記錄CentOS的安裝,主機板有使用UEFI和沒有使用UEFI
@@ -152,6 +152,92 @@ sudo yum install dotnet-sdk-2.1.4
 #執行 
 [root@localhost ~]# dotnet run 
 #***Output***: #> Hello World! 
+
+```
+#### 安裝Nginx
+在 RHEL, CentOS 或 Fedora 安裝 Nginx, 最簡單的方法是先加入 Nginx 的 CentOS 7 yum repository, 然後用 Yum 安裝
+* 編寫最新的 Nginx 套件位置
+```
+#vim /etc/yum.repos.d/nginx.repo
+[nginx]
+name=nginx repo
+baseurl=http://nginx.org/packages/centos/$releasever/$basearch/
+gpgcheck=0
+enabled=1
+```
+* 更新一下所有套件庫的快取資料。
+```
+yum -y update
+```
+* 利用 yum 安裝
+```
+yum install nginx
+```
+* 啟動防火牆
+```
+firewall-cmd --permanent --zone=public --add-service=http
+firewall-cmd --permanent --zone=public --add-service=https
+firewall-cmd --reload
+```
+* 設定ngix
+安裝好 Nginx 網頁伺服器後, 便可以用 systemctl 啟動/停止/重新啟動 Nginx, 現在啟動 Nginx 及設定開機自動啟動:
+```
+systemctl start nginx.service
+systemctl enable nginx.service
+```
+#### 設定nginx
+以下是default的設定範例 /etc/nginx/conf.d/default.conf
+
+```
+server {
+    listen 80;
+    location / {
+        proxy_pass http://localhost:5000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection keep-alive;
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
+
+```
+建立好設定檔後透過以下命令重新啟動 nginx
+```
+systemctl restart nginx.service
+sudo service nginx restart
+sudo nginx -t 以驗證組態檔的語法
+
+```
+
+#### 建立服務檔
+指令如下
+```
+vim /etc/systemd/system/gomoshop.service
+```
+內容如下
+```
+[Unit]
+Description=GomoShop  running on Centos7
+
+[Service]
+WorkingDirectory=/home/wwwdata/wwwshop
+ExecStart=/usr/bin/dotnet /home/wwwdata/wwwshop/Gomo.CC.UI.Portal.dll
+Restart=always
+RestartSec=10  # Restart service after 10 seconds if dotnet service crashes
+SyslogIdentifier=dotnet-gomoshop
+User=root
+Environment=ASPNETCORE_ENVIRONMENT=Production
+
+[Install]
+WantedBy=multi-user.target
+```
+指令參考
+```
+systemctl enable gomoshop.service
+systemctl status gomoshop.service
+systemctl restart gomoshop.service
+journalctl -fu gomoshop.service
 
 ```
 ## 參考  
