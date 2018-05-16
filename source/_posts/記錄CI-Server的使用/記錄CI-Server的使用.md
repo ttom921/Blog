@@ -70,7 +70,8 @@ CI Server是Continuout Integration Server (持續整合伺服器)的縮寫
       bat 'dotnet publish --configuration Release /p:PublishProfile=develop.pubxml /p:UserName=username /p:Password=userpassword /p:AllowUntrustedCertificate=True'
     }
   ```
-  
+* 發佈到linux
+    
 
 * 參考資料
  * [Jenkins官方](https://jenkins.io/)
