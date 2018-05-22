@@ -13,6 +13,9 @@ CI Server是Continuout Integration Server (持續整合伺服器)的縮寫
   接下會問要麼plugin,主要選擇git和msbuilder
   建立使用者可參考[在windows安裝jenkins和入門](https://dotblogs.com.tw/kinanson/2017/08/17/135639)
   建立專案可參考[如何使用 Jenkins 2 建置 .NET 專案](https://blog.yowko.com/2017/02/jenkins-2-build-dotnet-project.html)
+* 可設定node
+  目地是為了使用那一個服務器來幫忙建立專案，所以有命名，在設定node時要將名稱代入ex node('master')，才可執行該服務器
+  
   在vs2017的msbuil放在
   ```
   D:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/amd64
@@ -71,7 +74,73 @@ CI Server是Continuout Integration Server (持續整合伺服器)的縮寫
     }
   ```
 * 發佈到linux
-    
+  * 1.1 取出專案
+```
+ stage('linux-取出專案'){
+        checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: '*/dev']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'xxx-xxx_xxx_xx_xx_xx', url: 'http://10.0.0.10:88/Bonobo.Git.Server/Gomo.CC_git.git']]]
+    }
+```
+ * 1.2 建置專案
+ ```
+  stage('linux-建置'){
+         bat 'dotnet build -c Release /p:DeployOnBuild=true /p:PublishProfile=dev_linux.pubxml'
+    }
+ ```
+ * 1.3  建立壓縮檔
+ ```
+     def buildNumber = env.BUILD_NUMBER
+     def workspace = env.WORKSPACE
+     def buildUrl = env.BUILD_URL
+     def dirprjrelease= env.WORKSPACE+'/Gomo.CC.UI.Portal/bin/Release/PublishOutput'
+     def dateFormat = new SimpleDateFormat("yyyyMMddHHmm")
+     def date = new Date()
+     def usedate=dateFormat.format(date)
+     def zipfile=usedate +'.zip'
+     def winrar = "\"C:/Program Files/WinRAR/WinRAR.exe\""
+     def winparam = "a -afzip -ep1"
+	 def pscp ="D:/tools/Putty/pscp.exe"
+	stage('test'){
+        bat "${winrar} ${winparam} ${zipfile} \"${dirprjrelease}/*.*\" -r "
+    } 
+ ```
+ * 1.4  上傳壓縮檔
+ ```
+  stage('上傳檔案'){
+       bat"echo y | \"${pscp}\" -pw 12345678 \"${workspace}/${zipfile}\" root@192.168.2.222:/home/ttom "
+    }
+ ```
+* 1.5 停止服務
+```
+   stage('停止服務'){
+        sh "cd ${zipdest}"
+        sh "systemctl stop gomoshop.service"
+    }
+```
+* 1.7 開始服務
+```
+    stage('開始服務'){
+        sh "systemctl restart gomoshop.service"
+    }
+```	
+* 1.6 解壓壓縮檔
+```
+ stage('unzip檔案'){
+        sh "unzip -o ${zipdest}/${zipfile} -d ${zipdest}"
+    }
+``` 
+* 1.7 刪除壓縮檔
+```
 
+```
+  * 1.1 刪除壓縮檔
+  * 1.2 建立壓縮檔 
+  * 1.3 上傳壓縮檔
+  * 1.4 停止服務
+  * 1.5 解壓壓縮檔
+  * 1.6 刪除壓縮檔
+  * 1.7 開始服務
+  
+  
+  
 * 參考資料
  * [Jenkins官方](https://jenkins.io/)
