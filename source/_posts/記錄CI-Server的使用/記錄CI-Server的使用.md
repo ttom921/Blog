@@ -13,6 +13,13 @@ CI Server是Continuout Integration Server (持續整合伺服器)的縮寫
   接下會問要麼plugin,主要選擇git和msbuilder
   建立使用者可參考[在windows安裝jenkins和入門](https://dotblogs.com.tw/kinanson/2017/08/17/135639)
   建立專案可參考[如何使用 Jenkins 2 建置 .NET 專案](https://blog.yowko.com/2017/02/jenkins-2-build-dotnet-project.html)
+* Centos要使用
+  注意要安裝java
+```
+ yum remove java
+ yum install java-1.8.0-openjdk
+```  
+  [參考資料](https://wiki.jenkins.io/display/JENKINS/Installing+Jenkins+on+Red+Hat+distributions#InstallingJenkinsonRedHatdistributions-ImportantNoteonCentOSJava)
 * 可設定node
   目地是為了使用那一個服務器來幫忙建立專案，所以有命名，在設定node時要將名稱代入ex node('master')，才可執行該服務器
   
