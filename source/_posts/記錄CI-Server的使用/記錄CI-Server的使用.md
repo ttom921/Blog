@@ -133,6 +133,7 @@ CI Server是Continuout Integration Server (持續整合伺服器)的縮寫
 		stage('上傳檔案'){
            #bat"echo y | \"${pscp}\" -pw 12345678 \"${workspace}/${zipfile}\" root@192.168.2.222:/home/ttom "
 		   bat "echo y | \"${pscp}\" -pw ${hostpw} \"${workspace}/${zipfile}\" ${hostaccount}@${host}:${hostpath} "
+		   bat "del \"${workspace}\\${zipfile}\""
         }
 	}
 	node('ct7os222'){
@@ -144,6 +145,9 @@ CI Server是Continuout Integration Server (持續整合伺服器)的縮寫
         }
 		stage('開始服務'){
             sh "systemctl restart gomoshop.service"
+        }
+		stage('刪除zip'){
+            sh "rm -rf ${zipdest}/${zipfile}"
         }
 	}
 ``` 
