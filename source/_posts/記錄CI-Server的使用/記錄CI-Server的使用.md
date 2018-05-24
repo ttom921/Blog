@@ -18,8 +18,10 @@ CI Server是Continuout Integration Server (持續整合伺服器)的縮寫
 ```
  yum remove java
  yum install java-1.8.0-openjdk
-```  
+```
+
   [參考資料](https://wiki.jenkins.io/display/JENKINS/Installing+Jenkins+on+Red+Hat+distributions#InstallingJenkinsonRedHatdistributions-ImportantNoteonCentOSJava)
+  
 * 可設定node
   目地是為了使用那一個服務器來幫忙建立專案，所以有命名，在設定node時要將名稱代入ex node('master')，才可執行該服務器
   
@@ -46,33 +48,37 @@ CI Server是Continuout Integration Server (持續整合伺服器)的縮寫
 ##### 使用Pipleline
   **注意專案名稱不能使用中文，不然在console下不能執行,發行檔也不能使用中文** 
 * 使用msbuild
-    * 1.1 先從git將程式碼取下
-    * 1.2 要nuget來restore
-	```
+  * 1.1 先從git將程式碼取下
+  * 1.2 要nuget來restore
+  ```
 	D:\tools\NuGet restore
-	```
-    * 1.3 以msbuild	
-	```
+  ```
+  * 1.3 以msbuild	
+  ```
 	"D:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/amd64/"msbuild /p:Configuration=Dev-Release
-	```
-	* 1.4 發佈
-	```
+  ```
+  * 1.4 發佈
+  ```
 	"D:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/amd64/"msbuild /p:Configuration=Dev-Release /p:DeployOnBuild=true /p:PublishProfile=開發版.pubxml /p:UserName=xxxxx /p:Password=xxxx /p:AllowUntrustedCertificate=True /p:EnableMSDeployAppOffline=true 
-	```
+  ```
+	
 * 使用dotnet來處理
   * 1.1 先從git將程式碼取下
     可以使用它的語法產生器來生成git取得程式碼
+	
   ```
   stage('取出專案'){
       checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: '*/dev']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'XXXXXXX-XXX-XXX_XXXX', url: 'http://127.0.0.1:88/Bonobo.Git.Server/Gomo.CC_git.git']]]
   }
-  ``` 
+  ```
+  
   * 1.2 建置專案
   ```
   stage('建置'){
         bat 'dotnet build --configuration Release'
     }
   ```
+  
   * 1.3 發佈專案到IIS
     目前是使用webdeploy和IIS來發行網店
   ```
@@ -80,6 +86,7 @@ CI Server是Continuout Integration Server (持續整合伺服器)的縮寫
       bat 'dotnet publish --configuration Release /p:PublishProfile=develop.pubxml /p:UserName=username /p:Password=userpassword /p:AllowUntrustedCertificate=True'
     }
   ```
+  
 * 發佈到linux
   * 1.1 取出專案
   * 1.2 建置專案
