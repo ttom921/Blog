@@ -82,72 +82,65 @@ CI Server是Continuout Integration Server (持續整合伺服器)的縮寫
   ```
 * 發佈到linux
   * 1.1 取出專案
-```
- stage('linux-取出專案'){
-        checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: '*/dev']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'xxx-xxx_xxx_xx_xx_xx', url: 'http://10.0.0.10:88/Bonobo.Git.Server/Gomo.CC_git.git']]]
-    }
-```
- * 1.2 建置專案
- ```
-  stage('linux-建置'){
-         bat 'dotnet build -c Release /p:DeployOnBuild=true /p:PublishProfile=dev_linux.pubxml'
-    }
- ```
- * 1.3  建立壓縮檔
- ```
-     def buildNumber = env.BUILD_NUMBER
-     def workspace = env.WORKSPACE
-     def buildUrl = env.BUILD_URL
-     def dirprjrelease= env.WORKSPACE+'/Gomo.CC.UI.Portal/bin/Release/PublishOutput'
-     def dateFormat = new SimpleDateFormat("yyyyMMddHHmm")
-     def date = new Date()
-     def usedate=dateFormat.format(date)
-     def zipfile=usedate +'.zip'
-     def winrar = "\"C:/Program Files/WinRAR/WinRAR.exe\""
-     def winparam = "a -afzip -ep1"
-	 def pscp ="D:/tools/Putty/pscp.exe"
-	stage('test'){
-        bat "${winrar} ${winparam} ${zipfile} \"${dirprjrelease}/*.*\" -r "
-    } 
- ```
- * 1.4  上傳壓縮檔
- ```
-  stage('上傳檔案'){
-       bat"echo y | \"${pscp}\" -pw 12345678 \"${workspace}/${zipfile}\" root@192.168.2.222:/home/ttom "
-    }
- ```
-* 1.5 停止服務
-```
-   stage('停止服務'){
-        sh "cd ${zipdest}"
-        sh "systemctl stop gomoshop.service"
-    }
-```
-* 1.7 開始服務
-```
-    stage('開始服務'){
-        sh "systemctl restart gomoshop.service"
-    }
-```	
-* 1.6 解壓壓縮檔
-```
- stage('unzip檔案'){
-        sh "unzip -o ${zipdest}/${zipfile} -d ${zipdest}"
-    }
-``` 
-* 1.7 刪除壓縮檔
-```
-
-```
-  * 1.1 刪除壓縮檔
-  * 1.2 建立壓縮檔 
-  * 1.3 上傳壓縮檔
-  * 1.4 停止服務
-  * 1.5 解壓壓縮檔
-  * 1.6 刪除壓縮檔
+  * 1.2 建置專案
+  * 1.3 壓縮專案
+  * 1.4 上傳壓縮專案檔
+  * 使用不同的node
+  * 1.5 停止服務
+  * 1.6 解壓壓縮檔
   * 1.7 開始服務
   
-  
+```
+    #會用到的程式庫
+    import java.text.SimpleDateFormat
+    def dateFormat = new SimpleDateFormat("yyyyMMddHHmm")
+    def date = new Date()
+    def usedate=dateFormat.format(date)
+    //def zipfile=usedate +'.zip'
+    def zipfile='201805181725.zip'
+    def winrar = "\"C:/Program Files/WinRAR/WinRAR.exe\""
+    def winparam = "a -afzip -ep1"
+    def pscp ="D:/tools/Putty/pscp.exe"
+    //def zipdest="/home/wwwdata/test"
+    def zipdest="/home/wwwdata/wwwshop"
+	//目標機器的設定
+	def host="192.168.2.222"
+	def hostaccount="root"
+	def hostpw="12345678"
+	def hostpath="/home/wwwdata/wwwshop"
+	
+	node('master') { //使用master的節點,是windows系統
+	    def buildNumber = env.BUILD_NUMBER
+        def workspace = env.WORKSPACE
+        def buildUrl = env.BUILD_URL
+        def dirprjrelease= env.WORKSPACE+'/Gomo.CC.UI.Portal/bin/Release/PublishOutput'
+		stage('linux-取出專案'){
+            checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: '*/dev']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'xxx-xxx_xxx_xx_xx_xx', url: 'http://10.0.0.10:88/Bonobo.Git.Server/Gomo.CC_git.git']]]
+        }
+		stage('linux-建置'){
+            bat 'dotnet build -c Release /p:DeployOnBuild=true /p:PublishProfile=dev_linux.pubxml'
+        }
+		stage('壓縮專案'){
+            bat "${winrar} ${winparam} ${zipfile} \"${dirprjrelease}/*.*\" -r "
+        } 
+		stage('上傳檔案'){
+           #bat"echo y | \"${pscp}\" -pw 12345678 \"${workspace}/${zipfile}\" root@192.168.2.222:/home/ttom "
+		   bat "echo y | \"${pscp}\" -pw ${hostpw} \"${workspace}/${zipfile}\" ${hostaccount}@${host}:${hostpath} "
+        }
+	}
+	node('ct7os222'){
+	    stage('停止服務'){
+            sh "systemctl stop gomoshop.service"
+        }
+		stage('unzip檔案'){
+            sh "unzip -o ${zipdest}/${zipfile} -d ${zipdest}"
+        }
+		stage('開始服務'){
+            sh "systemctl restart gomoshop.service"
+        }
+	}
+``` 
+
   
 * 參考資料
  * [Jenkins官方](https://jenkins.io/)
