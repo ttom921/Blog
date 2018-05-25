@@ -6,6 +6,13 @@ tags:
   - CentOS
 date: 2018-05-16 10:11:54
 ---
+#### 將看到脫窗的註解文字 深藍色 改變顏色
+```
+shell# vim /home/eric/.vimrc
+ 
+hi Comment ctermfg=cyan
+
+```
 #### 這是記錄Vim的顏色的設定
 原來的設定有在註解看不清楚，所以來設定一下
  * 下載molokai的配色
