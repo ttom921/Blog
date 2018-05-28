@@ -3,7 +3,7 @@ title: 記錄在WinRarCMD的使用
 categories:
   - 記錄
 tags:
-  - centos
+  - CentOS
 date: 2018-05-16 13:40:55
 ---
 #### 記錄一下WinRar如何使用cmd

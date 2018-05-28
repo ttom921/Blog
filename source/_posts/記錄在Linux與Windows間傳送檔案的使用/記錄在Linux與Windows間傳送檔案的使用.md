@@ -3,7 +3,8 @@ title: 記錄在Linux與Windows間傳送檔案的使用
 categories:
   - 記錄
 tags:
-  - centos
+  - Centos
+  - Linux
 date: 2018-05-16 12:03:13
 ---
 #### 記錄將windwos的檔案傳送到linux

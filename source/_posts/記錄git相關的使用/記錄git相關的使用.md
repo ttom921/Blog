@@ -1,7 +1,7 @@
 ---
 title: 記錄git相關的使用
-categories: [記錄]
-tags: [git]
+categories: 記錄
+tags: git
 date: 2018-03-08 10:08:33
 ---
 ### 在github出現安全的問題

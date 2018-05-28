@@ -61,7 +61,13 @@ CI Server是Continuout Integration Server (持續整合伺服器)的縮寫
   ```
 	"D:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/Bin/amd64/"msbuild /p:Configuration=Dev-Release /p:DeployOnBuild=true /p:PublishProfile=開發版.pubxml /p:UserName=xxxxx /p:Password=xxxx /p:AllowUntrustedCertificate=True /p:EnableMSDeployAppOffline=true 
   ```
-	
+* 使用Pipleline的定時處理
+ 在pipleline的定期建置輸入如下，每一天的上午04:00來執行
+
+ ```
+ 0 04 * * *
+ ```
+ 
 * 使用dotnet來處理
   * 1.1 先從git將程式碼取下
     可以使用它的語法產生器來生成git取得程式碼
