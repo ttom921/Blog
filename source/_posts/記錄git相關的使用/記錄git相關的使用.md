@@ -54,6 +54,19 @@ git push --delete origin tagName
 + 1-2 當你按右鍵的時候,然後選擇的是TortoiseGit中的「合併」功能
 + 1-3 請選擇你要拿來合併的分支，也就是你剛剛開發完新功能的分支
 
+### 如何在commit下和issue有關
+如果要有關系加入
+```
+#1
+```
+
+加入下列的關鍵字fixed 會關畢此issue
+```
+fixes #12
+```
+
+
 ##### 參考
 * [完成新功能開發：合併Branch](http://blog.pulipuli.info/2013/02/github-part3-git.html#postcatagithub-part3-git.html0_anchor12)
+* [GitHub 的 issue 功能](https://www.zhihu.com/question/22969033) 
 

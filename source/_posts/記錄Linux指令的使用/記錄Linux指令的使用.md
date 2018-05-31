@@ -30,7 +30,7 @@ time echo "scale=${num}; 4*a(1)" | bc -lq
 ```
 sudo service crond start
 ```
-檢查是crontab的指令是否有執行
+檢查是crontab的指令是否有執行，要root權限才可以看
 ```
 tail -f /var/log/cron
 ```
@@ -59,3 +59,5 @@ crontab -l
 ```
 echo ''>ttom
 ```
+###### 參考資料
+* [cron jobs crontab 排程教學](https://www.puritys.me/docs-blog/article-20-cron-jobs-crontab-%E6%8E%92%E7%A8%8B%E6%95%99%E5%AD%B8.html)
