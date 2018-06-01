@@ -161,3 +161,4 @@ CI Server是Continuout Integration Server (持續整合伺服器)的縮寫
   
 * 參考資料
  * [Jenkins官方](https://jenkins.io/)
+ * [test](https://ithelp.ithome.com.tw/users/20045817/ironman/474)
