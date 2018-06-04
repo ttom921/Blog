@@ -157,9 +157,12 @@ CI Server是Continuout Integration Server (持續整合伺服器)的縮寫
         }
 	}
 ``` 
-
+### 網頁自動測試相關
+* 參考網站
+ * [持續整合 - 透過 Selenium 實現自動化測試](https://blog.toright.com/posts/4268/%E6%8C%81%E7%BA%8C%E6%95%B4%E5%90%88-%E9%80%8F%E9%81%8E-selenium-%E5%AF%A6%E7%8F%BE%E8%87%AA%E5%8B%95%E5%8C%96%E6%B8%AC%E8%A9%A6.html)
+ * [CI Server 23 - 使用Selenium進行瀏覽器自動化測試](https://ithelp.ithome.com.tw/articles/10108684)
   
-* 參考資料
+### 參考資料
  * [Jenkins官方](https://jenkins.io/)
  * [Jenkins获取git tag代码](https://blog.csdn.net/qq_33285112/article/details/78719969)
- * [test](https://ithelp.ithome.com.tw/users/20045817/ironman/474)
+ 
