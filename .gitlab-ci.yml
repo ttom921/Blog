@@ -3,12 +3,14 @@ pages:
   cache:
     paths:
     - node_modules/
-script:
-- npm install hexo-cli -g
-- npm install
-- hexo deploy
-artifacts:
+
+  script:
+  - npm install hexo-cli -g
+  - npm install hexo-generator-feed --save
+  - npm install
+  - hexo g
+  artifacts:
     paths:
     - public
-only:
-- maste
+  only:
+  - master
