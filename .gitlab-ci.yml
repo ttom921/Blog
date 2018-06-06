@@ -1,6 +1,6 @@
 image: node:8.9.4
 pages:
-cache:
+  cache:
     paths:
     - node_modules/
 script:
