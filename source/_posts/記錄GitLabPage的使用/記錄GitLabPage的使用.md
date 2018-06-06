@@ -13,6 +13,7 @@ date: 2018-06-06 16:11:29
      ** 注意 username 是你的帳號 **
  3. 使用git將目前的專案上傳到gitlab
  4. 在gitlab上使用網頁來加入下面的檔案 .gitlab-ci.yml
+    ** 注意自已的node的版本 **
 ```
 image: node:8.9.4
 pages:
