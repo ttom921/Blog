@@ -1,6 +1,6 @@
 image: node:6.10.2
 pages:
-cache:
+  cache:
     paths:
     - node_modules/
 script:
