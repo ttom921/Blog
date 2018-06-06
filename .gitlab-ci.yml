@@ -1,13 +1,27 @@
-image: node:6.10.2
+# This file is a template, and might need editing before it works on your project.
+# Full project: https://gitlab.com/pages/hexo
+image: node:4.2.2
+
 cache:
   paths:
   - node_modules/
-script:
-- npm install hexo-cli -g
-- npm install
-- hexo deploy
-artifacts:
+
+before_script:
+  - export TZ='Asia/Shanghai'
+  - git config --global user.name "ttom921"
+  - git config --global user.email "ttom921@hotmail.com"
+  - npm install -g hexo
+  - npm install -g hexo-cli
+  - npm install
+
+pages:
+  stage: deploy
+  script:
+  - hexo clean
+  - hexo generate
+  - hexo deploy
+  artifacts:
     paths:
     - public
-only:
-- master
+  only:
+  - master
