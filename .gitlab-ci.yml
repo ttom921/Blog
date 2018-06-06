@@ -1,5 +1,5 @@
 image: node:6.10.2
-pages:
+build:
   cache:
     paths:
     - node_modules/
