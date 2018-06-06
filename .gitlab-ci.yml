@@ -1,8 +1,7 @@
 image: node:6.10.2
-build:
-  cache:
-    paths:
-    - node_modules/
+cache:
+  paths:
+  - node_modules/
 script:
 - npm install hexo-cli -g
 - npm install
